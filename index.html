@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Life-Time Valentine ❤️</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+body { background: #080509; color: white; font-family: 'Poppins', sans-serif; margin:0; overflow:hidden; height:100vh;}
+.bg-animate { position: fixed; top:0; left:0; width:100%; height:100%;
+background: linear-gradient(45deg,#1a0a1a,#080509,#2d0b16);
+background-size:400% 400%; animation: gradientBG 15s ease infinite; z-index:-2;}
+@keyframes gradientBG {0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}}
+
+.glass { background: rgba(255,255,255,0.03);
+backdrop-filter: blur(25px);
+border:1px solid rgba(255,45,117,0.3);
+border-radius:30px;
+box-shadow:0 0 30px rgba(255,45,117,0.15);
+width:90%; max-width:360px;}
+
+.rizz-font { font-family:'Dancing Script', cursive;
+color:#ff2d75;
+text-shadow:0 0 10px rgba(255,45,117,0.5);}
+
+.step-content { display:none; }
+.step-content.active { display:flex; flex-direction:column; align-items:center; justify-content:center; animation:fadeIn 0.6s ease;}
+@keyframes fadeIn { from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
+
+.swiper { width:100%; height:380px; }
+.swiper-slide { border-radius:20px; overflow:hidden; }
+.swiper-slide img { width:100%; height:100%; object-fit:cover; }
+
+.btn-premium {
+background:linear-gradient(135deg,#ff2d75,#fb7185);
+box-shadow:0 8px 20px rgba(255,45,117,0.4);
+transition:0.3s ease;
+}
+.btn-premium:active { transform:scale(0.95); }
+
+.heart-float { position:absolute; color:rgba(255,45,117,0.2);
+pointer-events:none; animation:floatUp linear infinite;}
+@keyframes floatUp { from{transform:translateY(110vh) rotate(0deg); opacity:1;}
+to{transform:translateY(-10vh) rotate(360deg); opacity:0;} }
+</style>
+</head>
+
+<body class="flex items-center justify-center">
+
+<audio id="bgMusic" loop>
+<source src="dandelions.mp3" type="audio/mpeg">
+</audio>
+
+<div class="bg-animate"></div>
+<div id="heart-container" class="fixed inset-0 pointer-events-none"></div>
+
+<div class="flex items-center justify-center w-full">
+
+<!-- STEP 1 -->
+<div id="step1" class="step-content active glass p-8 text-center">
+<div class="text-6xl mb-4">💌</div>
+<h1 class="text-2xl font-bold mb-4">Pyaari si Warning!</h1>
+<p class="text-sm text-gray-400 mb-6">
+Iske aage tabhi badhna jab tum lifetime ke liye mere dil me rehne ko ready ho 😉
+</p>
+<button onclick="nextStep(2)" class="btn-premium w-full py-3 rounded-full font-bold">
+Taiyaar Hoon! ✨
+</button>
+</div>
+
+<!-- STEP 2 SLIDER -->
+<div id="step2" class="step-content glass p-4 text-center">
+<h2 class="rizz-font text-4xl mb-4">Pure Beauty 😍</h2>
+
+<div class="swiper mySwiper">
+<div class="swiper-wrapper">
+<div class="swiper-slide"><img src="IMG-20260212-WA0004.jpg"></div>
+<div class="swiper-slide"><img src="IMG-20260212-WA0005.jpg"></div>
+<div class="swiper-slide"><img src="IMG-20260212-WA0006.jpg"></div>
+<div class="swiper-slide"><img src="IMG-20260212-WA0007.jpg"></div>
+</div>
+</div>
+
+<p class="text-xs text-pink-400 my-4 animate-pulse">Swipe karke dekho ✨</p>
+<button onclick="nextStep(3)" class="btn-premium w-full py-3 rounded-full font-bold">
+Aage Chalein ➡️
+</button>
+</div>
+
+<!-- STEP 3 -->
+<div id="step3" class="step-content glass p-8 text-center">
+<h2 class="rizz-font text-4xl mb-6">One Last Question 💍</h2>
+<p class="mb-6 italic text-gray-300">
+Will you be my lifetime Valentine?
+</p>
+
+<div class="flex flex-col gap-4 w-full relative min-h-[120px]">
+<button onclick="finish()" class="btn-premium w-full py-4 rounded-full font-bold text-lg">
+Haan Ji! ❤️
+</button>
+<button id="noBtn" onmouseover="moveNo()" onclick="moveNo()" class="text-gray-500 text-xs">
+Nahi ❌
+</button>
+</div>
+</div>
+
+</div>
+
+<script>
+let swiper;
+
+function nextStep(s) {
+document.querySelectorAll('.step-content').forEach(el => el.classList.remove('active'));
+document.getElementById('step'+s).classList.add('active');
+
+if(s===2){
+setTimeout(()=>{
+swiper = new Swiper(".mySwiper", {
+effect:"cards",
+grabCursor:true
+});
+},100);
+}
+
+document.getElementById("bgMusic").play().catch(()=>{});
+}
+
+function moveNo(){
+const btn=document.getElementById('noBtn');
+btn.style.position='fixed';
+btn.style.left=Math.random()*(window.innerWidth-100)+'px';
+btn.style.top=Math.random()*(window.innerHeight-50)+'px';
+}
+
+function finish(){
+confetti({particleCount:300, spread:100, origin:{y:0.6}});
+document.getElementById('step3').innerHTML=`
+<div class="text-6xl mb-4">💖</div>
+<h2 class="rizz-font text-4xl mb-2">Locked Forever!</h2>
+<p>I Love You So Much ❤️</p>
+`;
+}
+
+function createHeart(){
+const heart=document.createElement('div');
+heart.classList.add('heart-float');
+heart.innerHTML='❤️';
+heart.style.left=Math.random()*100+'vw';
+heart.style.fontSize=Math.random()*20+10+'px';
+heart.style.animationDuration=Math.random()*3+4+'s';
+document.getElementById('heart-container').appendChild(heart);
+setTimeout(()=>heart.remove(),5000);
+}
+setInterval(createHeart,600);
+</script>
+
+</body>
+</html>
