@@ -7,49 +7,32 @@
 
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-body { background: #080509; color: white; font-family: 'Poppins', sans-serif; margin:0; overflow:hidden; height:100vh;}
-.bg-animate { position: fixed; top:0; left:0; width:100%; height:100%;
-background: linear-gradient(45deg,#1a0a1a,#080509,#2d0b16);
-background-size:400% 400%; animation: gradientBG 15s ease infinite; z-index:-2;}
-@keyframes gradientBG {0%{background-position:0% 50%;}
-50%{background-position:100% 50%;}
-100%{background-position:0% 50%;}}
+body{margin:0;height:100vh;overflow:hidden;background:#080509;color:white;font-family:'Poppins',sans-serif;}
+.bg-animate{position:fixed;inset:0;background:linear-gradient(45deg,#1a0a1a,#080509,#2d0b16);
+background-size:400% 400%;animation:gradientBG 15s ease infinite;z-index:-2;}
+@keyframes gradientBG{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 
-.glass { background: rgba(255,255,255,0.03);
-backdrop-filter: blur(25px);
-border:1px solid rgba(255,45,117,0.3);
-border-radius:30px;
-box-shadow:0 0 30px rgba(255,45,117,0.15);
-width:90%; max-width:360px;}
+.glass{background:rgba(255,255,255,0.04);backdrop-filter:blur(20px);
+border:1px solid rgba(255,45,117,0.3);border-radius:30px;
+box-shadow:0 0 25px rgba(255,45,117,0.2);width:90%;max-width:360px;}
 
-.rizz-font { font-family:'Dancing Script', cursive;
-color:#ff2d75;
-text-shadow:0 0 10px rgba(255,45,117,0.5);}
+.rizz{font-family:'Dancing Script',cursive;color:#ff2d75;text-shadow:0 0 12px rgba(255,45,117,0.6);}
 
-.step-content { display:none; }
-.step-content.active { display:flex; flex-direction:column; align-items:center; justify-content:center; animation:fadeIn 0.6s ease;}
-@keyframes fadeIn { from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
+.step{display:none;}
+.step.active{display:flex;flex-direction:column;align-items:center;justify-content:center;animation:fade 0.6s ease;}
+@keyframes fade{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 
-.swiper { width:100%; height:380px; }
-.swiper-slide { border-radius:20px; overflow:hidden; }
-.swiper-slide img { width:100%; height:100%; object-fit:cover; }
+.swiper{width:100%;height:380px;}
+.swiper-slide img{width:100%;height:100%;object-fit:cover;border-radius:20px;}
 
-.btn-premium {
-background:linear-gradient(135deg,#ff2d75,#fb7185);
-box-shadow:0 8px 20px rgba(255,45,117,0.4);
-transition:0.3s ease;
-}
-.btn-premium:active { transform:scale(0.95); }
-
-.heart-float { position:absolute; color:rgba(255,45,117,0.2);
-pointer-events:none; animation:floatUp linear infinite;}
-@keyframes floatUp { from{transform:translateY(110vh) rotate(0deg); opacity:1;}
-to{transform:translateY(-10vh) rotate(360deg); opacity:0;} }
+.btn{background:linear-gradient(135deg,#ff2d75,#fb7185);
+box-shadow:0 6px 18px rgba(255,45,117,0.4);transition:.3s;}
+.btn:active{transform:scale(.95);}
 </style>
 </head>
 
@@ -60,25 +43,41 @@ to{transform:translateY(-10vh) rotate(360deg); opacity:0;} }
 </audio>
 
 <div class="bg-animate"></div>
-<div id="heart-container" class="fixed inset-0 pointer-events-none"></div>
 
 <div class="flex items-center justify-center w-full">
 
 <!-- STEP 1 -->
-<div id="step1" class="step-content active glass p-8 text-center">
+<div id="step1" class="step active glass p-8 text-center">
 <div class="text-6xl mb-4">💌</div>
-<h1 class="text-2xl font-bold mb-4">Pyaari si Warning!</h1>
+<h1 class="text-2xl font-bold mb-4">Ek Warning Hai!</h1>
 <p class="text-sm text-gray-400 mb-6">
-Iske aage tabhi badhna jab tum lifetime ke liye mere dil me rehne ko ready ho 😉
+Aage sirf wahi badhe jo lifetime commitment ke liye ready ho 😉
 </p>
-<button onclick="nextStep(2)" class="btn-premium w-full py-3 rounded-full font-bold">
-Taiyaar Hoon! ✨
-</button>
+<button onclick="next(2)" class="btn w-full py-3 rounded-full font-bold">Taiyaar Hoon ✨</button>
 </div>
 
-<!-- STEP 2 SLIDER -->
-<div id="step2" class="step-content glass p-4 text-center">
-<h2 class="rizz-font text-4xl mb-4">Pure Beauty 😍</h2>
+<!-- STEP 2 -->
+<div id="step2" class="step glass p-8 text-center">
+<h2 class="rizz text-4xl mb-6">Suno Na...</h2>
+<p class="mb-6 text-gray-300">
+Google ke paas sab answers hote hain,  
+par meri har khushi ka answer tum ho ❤️
+</p>
+<button onclick="next(3)" class="btn w-full py-3 rounded-full font-bold">Aur Sunao ➡️</button>
+</div>
+
+<!-- STEP 3 -->
+<div id="step3" class="step glass p-8 text-center">
+<h2 class="rizz text-4xl mb-6">Sach Bataun?</h2>
+<p class="mb-6 text-gray-300">
+Tum meri life ka best plot twist ho ✨
+</p>
+<button onclick="next(4)" class="btn w-full py-3 rounded-full font-bold">Proof Dikhao 😌</button>
+</div>
+
+<!-- STEP 4 SLIDER -->
+<div id="step4" class="step glass p-4 text-center">
+<h2 class="rizz text-4xl mb-4">Pure Beauty 😍</h2>
 
 <div class="swiper mySwiper">
 <div class="swiper-wrapper">
@@ -90,76 +89,90 @@ Taiyaar Hoon! ✨
 </div>
 
 <p class="text-xs text-pink-400 my-4 animate-pulse">Swipe karke dekho ✨</p>
-<button onclick="nextStep(3)" class="btn-premium w-full py-3 rounded-full font-bold">
-Aage Chalein ➡️
-</button>
+<button onclick="next(5)" class="btn w-full py-3 rounded-full font-bold">Aage ➡️</button>
 </div>
 
-<!-- STEP 3 -->
-<div id="step3" class="step-content glass p-8 text-center">
-<h2 class="rizz-font text-4xl mb-6">One Last Question 💍</h2>
+<!-- STEP 5 -->
+<div id="step5" class="step glass p-8 text-center">
+<h2 class="rizz text-4xl mb-6">Meri Therapy 💖</h2>
+<p class="mb-6 text-gray-300">
+Tumse baat karke saari tension khatam ho jati hai.
+</p>
+<button onclick="next(6)" class="btn w-full py-3 rounded-full font-bold">Last Step ➡️</button>
+</div>
+
+<!-- STEP 6 -->
+<div id="step6" class="step glass p-8 text-center">
+<h2 class="rizz text-4xl mb-6">Ab Final Question 💍</h2>
 <p class="mb-6 italic text-gray-300">
 Will you be my lifetime Valentine?
 </p>
+<button onclick="next(7)" class="btn w-full py-3 rounded-full font-bold">Answer Do 💖</button>
+</div>
 
+<!-- STEP 7 -->
+<div id="step7" class="step glass p-8 text-center">
+<h2 class="rizz text-4xl mb-6">Be Mine?</h2>
 <div class="flex flex-col gap-4 w-full relative min-h-[120px]">
-<button onclick="finish()" class="btn-premium w-full py-4 rounded-full font-bold text-lg">
-Haan Ji! ❤️
-</button>
-<button id="noBtn" onmouseover="moveNo()" onclick="moveNo()" class="text-gray-500 text-xs">
-Nahi ❌
-</button>
+<button onclick="finish()" class="btn w-full py-4 rounded-full font-bold text-lg">Haan Ji ❤️</button>
+<button id="noBtn" onmouseover="moveNo()" onclick="moveNo()" class="text-gray-500 text-xs">Nahi ❌</button>
 </div>
 </div>
 
 </div>
 
 <script>
-let swiper;
+let swiperInstance = null;
 
-function nextStep(s) {
-document.querySelectorAll('.step-content').forEach(el => el.classList.remove('active'));
-document.getElementById('step'+s).classList.add('active');
+function next(s){
+  // hide all steps
+  document.querySelectorAll('.step').forEach(el=>{
+    el.classList.remove('active');
+  });
 
-if(s===2){
-setTimeout(()=>{
-swiper = new Swiper(".mySwiper", {
-effect:"cards",
-grabCursor:true
-});
-},100);
-}
+  // show selected step
+  const target = document.getElementById('step'+s);
+  if(target){
+    target.classList.add('active');
+  }
 
-document.getElementById("bgMusic").play().catch(()=>{});
+  // initialize slider only once
+  if(s === 4 && !swiperInstance){
+    setTimeout(()=>{
+      swiperInstance = new Swiper(".mySwiper", {
+        effect: "cards",
+        grabCursor: true,
+      });
+    },100);
+  }
+
+  // play music
+  const audio = document.getElementById('bgMusic');
+  if(audio){
+    audio.play().catch(()=>{});
+  }
 }
 
 function moveNo(){
-const btn=document.getElementById('noBtn');
-btn.style.position='fixed';
-btn.style.left=Math.random()*(window.innerWidth-100)+'px';
-btn.style.top=Math.random()*(window.innerHeight-50)+'px';
+  const btn = document.getElementById('noBtn');
+  btn.style.position = "fixed";
+  btn.style.left = Math.random()*(window.innerWidth-100)+"px";
+  btn.style.top = Math.random()*(window.innerHeight-50)+"px";
 }
 
 function finish(){
-confetti({particleCount:300, spread:100, origin:{y:0.6}});
-document.getElementById('step3').innerHTML=`
-<div class="text-6xl mb-4">💖</div>
-<h2 class="rizz-font text-4xl mb-2">Locked Forever!</h2>
-<p>I Love You So Much ❤️</p>
-`;
-}
+  confetti({
+    particleCount: 400,
+    spread: 120,
+    origin: { y: 0.6 }
+  });
 
-function createHeart(){
-const heart=document.createElement('div');
-heart.classList.add('heart-float');
-heart.innerHTML='❤️';
-heart.style.left=Math.random()*100+'vw';
-heart.style.fontSize=Math.random()*20+10+'px';
-heart.style.animationDuration=Math.random()*3+4+'s';
-document.getElementById('heart-container').appendChild(heart);
-setTimeout(()=>heart.remove(),5000);
+  document.getElementById('step7').innerHTML = `
+    <div class="text-6xl mb-4">💖</div>
+    <h2 class="rizz text-3xl mb-2">Locked Forever!</h2>
+    <p>I Love You So Much ❤️</p>
+  `;
 }
-setInterval(createHeart,600);
 </script>
 
 </body>
